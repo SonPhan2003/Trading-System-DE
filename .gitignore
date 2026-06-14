@@ -18,6 +18,19 @@ venv/
 # Local Docker orchestration (contains machine-specific settings/secrets)
 docker-compose.yml
 
+# Airflow runtime files
+PythonProject/airflow/logs/
+PythonProject/airflow/plugins/
+PythonProject/airflow/config/
+PythonProject/airflow/airflow.cfg
+PythonProject/airflow/airflow.db
+PythonProject/airflow/standalone_admin_password.txt
+PythonProject/airflow/webserver_config.py
+PythonProject/airflow/*.pid
+
+# Public export workspaces
+_public_repo_export*/
+
 # IDE
 .idea/
 .vscode/

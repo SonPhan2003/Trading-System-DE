@@ -1,0 +1,4 @@
+alpha-vantage
+dbt-mysql==1.7.0
+mysql-connector-python
+pandas
