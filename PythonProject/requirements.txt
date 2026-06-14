@@ -1,0 +1,9 @@
+alpha-vantage
+matplotlib
+mysql-connector-python
+numpy
+pandas
+scikit-learn
+scipy
+streamlit
+torch

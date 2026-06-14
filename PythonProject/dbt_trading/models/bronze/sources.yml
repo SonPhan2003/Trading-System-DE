@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: trading_source
+    schema: "{{ env_var('DB_NAME', 'Logging') }}"
+    description: Source tables loaded by the Python ingestion pipeline.
+    tables:
+      - name: raw_stock_prices
+        description: Bronze table containing Alpha Vantage OHLCV records.
+      - name: pipeline_runs
+        description: Pipeline execution metadata.
+      - name: data_quality_checks
+        description: Data quality check results recorded during ingestion.

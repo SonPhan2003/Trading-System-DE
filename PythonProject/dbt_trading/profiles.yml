@@ -1,0 +1,13 @@
+trading_system:
+  target: dev
+  outputs:
+    dev:
+      type: mysql
+      server: "{{ env_var('DB_HOST', 'mysqldb') }}"
+      port: "{{ env_var('DB_PORT', '3306') | int }}"
+      schema: "{{ env_var('DB_NAME', 'Logging') }}"
+      username: "{{ env_var('DB_USER', 'root') }}"
+      password: "{{ env_var('DB_PASSWORD') }}"
+      ssl_disabled: True
+      charset: utf8mb4
+      collation: utf8mb4_0900_ai_ci

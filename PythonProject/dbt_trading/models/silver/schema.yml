@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dbt_clean_daily_prices
+    description: Silver model with validated OHLCV rows transformed from the raw source table.
+    columns:
+      - name: symbol
+        tests:
+          - not_null
+      - name: date
+        tests:
+          - not_null
+      - name: open
+        tests:
+          - not_null
+      - name: high
+        tests:
+          - not_null
+      - name: low
+        tests:
+          - not_null
+      - name: close
+        tests:
+          - not_null
+      - name: volume
+        tests:
+          - not_null
