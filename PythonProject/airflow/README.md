@@ -10,23 +10,22 @@ extract_to_bronze_raw_stock_prices
 -> dbt_test_data_quality
 ```
 
-The DAG expects Airflow Variables for database configuration:
+The DAG expects database and AWS configuration from the container environment.
+In the local Docker Compose setup, these values are loaded from `PythonProject/.env`:
 
 ```text
-DB_PASSWORD
 DB_HOST
 DB_PORT
 DB_USER
+DB_PASSWORD
 DB_NAME
-```
-
-Only `DB_PASSWORD` is required if the defaults match your local setup.
-
-Alpha Vantage settings are read by the Python ingestion code from `PythonProject/.env`:
-
-```text
 ALPHAVANTAGE_API_KEY
 STOCK_SYMBOLS
 ALPHAVANTAGE_OUTPUT_SIZE
 ALPHAVANTAGE_REQUEST_DELAY_SECONDS
+AWS_REGION
+S3_RAW_BUCKET
+S3_RAW_PREFIX
 ```
+
+The DAG itself only adds `DBT_PROFILES_DIR` for dbt. The Python ingestion and dbt profile read the rest from the environment.

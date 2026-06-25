@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 import os
 
 
@@ -31,6 +32,13 @@ def get_required_env(name: str) -> str:
     return value
 
 
+def get_optional_env(name: str, default: Optional[str] = None) -> Optional[str]:
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return value.strip()
+
+
 def get_database_config() -> dict:
     return {
         "user": get_required_env("DB_USER"),
@@ -59,3 +67,15 @@ def get_alpha_vantage_output_size() -> str:
 
 def get_alpha_vantage_request_delay_seconds() -> float:
     return float(os.getenv("ALPHAVANTAGE_REQUEST_DELAY_SECONDS", "15"))
+
+
+def get_aws_region() -> str:
+    return os.getenv("AWS_REGION", "ap-southeast-1")
+
+
+def get_s3_raw_bucket() -> Optional[str]:
+    return get_optional_env("S3_RAW_BUCKET")
+
+
+def get_s3_raw_prefix() -> str:
+    return os.getenv("S3_RAW_PREFIX", "alpha_vantage/daily_prices").strip().strip("/")

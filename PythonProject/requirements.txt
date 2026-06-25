@@ -1,4 +1,5 @@
 alpha-vantage
+boto3
 matplotlib
 mysql-connector-python
 numpy

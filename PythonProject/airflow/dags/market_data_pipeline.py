@@ -12,11 +12,6 @@ DBT_DIR = f"{PROJECT_DIR}/PythonProject/dbt_trading"
 DBT_RUNTIME_FLAGS = "--target-path /tmp/dbt_target --log-path /tmp/dbt_logs"
 
 DEFAULT_ENV = {
-    "DB_HOST": "{{ var.value.get('DB_HOST', 'mysqldb') }}",
-    "DB_PORT": "{{ var.value.get('DB_PORT', '3306') }}",
-    "DB_USER": "{{ var.value.get('DB_USER', 'root') }}",
-    "DB_PASSWORD": "{{ var.value.DB_PASSWORD }}",
-    "DB_NAME": "{{ var.value.get('DB_NAME', 'Logging') }}",
     "DBT_PROFILES_DIR": DBT_DIR,
 }
 

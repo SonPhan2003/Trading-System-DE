@@ -18,6 +18,7 @@ from Data.Database import (
     insert_raw_stock_prices,
     start_pipeline_run,
 )
+from Data.s3_storage import upload_raw_stock_prices
 from Data.validation import validate_ohlcv_data, validation_passed
 
 PIPELINE_NAME = "daily_stock_price_ingestion"
@@ -39,6 +40,7 @@ def ingest_symbol(ts, symbol, output_size):
         data, _ = ts.get_daily(symbol=symbol, outputsize=output_size)
         data = normalize_alpha_vantage_daily(data)
         rows_extracted = len(data)
+        upload_raw_stock_prices(symbol, data, run_id)
         insert_raw_stock_prices(run_id, symbol, data)
         rows_loaded_to_raw = len(data)
         checks = validate_ohlcv_data(data, symbol)
