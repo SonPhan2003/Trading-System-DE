@@ -1,0 +1,44 @@
+name: CI - Python and dbt validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate Python and dbt
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install lightweight CI dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install dbt-mysql==1.7.0
+
+      - name: Check Python syntax
+        run: |
+          python -m compileall PythonProject/src PythonProject/airflow/dags
+
+      - name: Validate dbt project parsing
+        working-directory: PythonProject/dbt_trading
+        env:
+          DB_HOST: localhost
+          DB_PORT: "3306"
+          DB_USER: ci_user
+          DB_PASSWORD: ci_password
+          DB_NAME: Logging
+          DBT_PROFILES_DIR: .
+        run: |
+          dbt parse --project-dir . --profiles-dir .
