@@ -406,6 +406,20 @@ dbt tests validate the transformed tables, including:
 - price consistency rules;
 - unique symbol dimension records.
 
+## CI/CD
+
+This project uses GitHub Actions for lightweight CI validation on every push and
+pull request to `main`.
+
+The workflow checks:
+
+- Python syntax for ingestion, utility, and Airflow DAG code;
+- dbt project parsing with `dbt parse`.
+
+The workflow intentionally does not connect to AWS, Amazon RDS, or production
+data resources. Full database integration tests can be added later with a
+controlled test database or a temporary MySQL service.
+
 ## Security And Cost Notes
 
 - Do not commit `.env`, AWS keys, or RDS passwords.
